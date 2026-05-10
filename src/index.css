@@ -1,0 +1,341 @@
+/* ==========================================================================
+   1. RESET GLOBAL Y ESTABILIZACIÓN (Ultra Importante)
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #ff8c00;
+    /* Naranja Bleach sutil */
+    --primary-dim: rgba(255, 140, 0, 0.1);
+    --bg-dark: #050505;
+    /* Casi negro absoluto */
+    --card-bg: rgba(255, 255, 255, 0.03);
+    /* Vidrio sutil */
+    --text-main: #ffffff;
+    --text-muted: #888888;
+    --border-color: rgba(255, 255, 255, 0.06);
+    --glass: blur(10px) saturate(180%);
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--bg-dark);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    overflow-x: hidden;
+    /* Evita scroll horizontal */
+}
+
+/* ==========================================================================
+   2. ESTRUCTURA DE CENTRADO ABSOLUTO
+   ========================================================================== */
+/* Envuelve toda la app y la centra en la pantalla */
+.app-wrapper {
+    display: flex;
+    justify-content: center;
+    /* Centrado Horizontal */
+    align-items: flex-start;
+    /* Comienza arriba, pero centrado */
+    width: 100%;
+    min-height: 100vh;
+    padding: 60px 20px;
+    /* Espacio arriba y lados */
+}
+
+/* Contenedor del contenido, limita el ancho */
+.container {
+    width: 100%;
+    max-width: 1100px;
+    /* Ancho máximo minimalista */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centra los elementos internos (h1, searchbar, grid) */
+}
+
+/* Título Minimalista */
+h1 {
+    font-weight: 200;
+    /* Super fino y moderno */
+    letter-spacing: 4px;
+    /* Espaciado futurista */
+    text-transform: uppercase;
+    color: var(--text-main);
+    margin-bottom: 50px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 1px;
+    background: var(--primary);
+}
+
+/* ==========================================================================
+   3. BUSCADOR MODERN GLASS (SearchBar)
+   ========================================================================== */
+.search-container {
+    background: var(--card-bg);
+    backdrop-filter: var(--glass);
+    -webkit-backdrop-filter: var(--glass);
+    padding: 6px;
+    border-radius: 50px;
+    /* Totalmente redondeado */
+    display: flex;
+    border: 1px solid var(--border-color);
+    margin-bottom: 60px;
+    width: 100%;
+    max-width: 600px;
+    /* Buscador no tan ancho */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.search-container:focus-within {
+    border-color: rgba(255, 140, 0, 0.4);
+    box-shadow: 0 0 20px var(--primary-dim);
+}
+
+.search-container input {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 14px 25px;
+    font-size: 1rem;
+    flex: 1;
+    outline: none;
+    font-weight: 300;
+}
+
+.search-container input::placeholder {
+    color: #555;
+}
+
+.search-container button {
+    background: var(--primary);
+    border-radius: 50px;
+    padding: 0 30px;
+    border: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.search-container button:hover {
+    background-color: #ffaa33;
+    transform: scale(1.03);
+}
+
+/* ==========================================================================
+   4. GRID Y TARJETAS MINIMALISTAS (CharacterGrid)
+   ========================================================================== */
+.character-grid {
+    display: grid;
+    /* auto-fit para centrado perfecto */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    width: 100%;
+    justify-content: center;
+    /* Animación de entrada para el grid */
+    animation: fadeIn 0.8s ease-out;
+}
+
+.character-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    height: 480px;
+    /* Ligeramente más bajas */
+    width: 100%;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    opacity: 0;
+    animation: cardFadeIn 0.5s ease-out forwards;
+}
+
+/* Animación de retraso para cada tarjeta (requiere JS para ser perfecto, pero esto ayuda) */
+.character-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.character-card:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.character-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.character-card:nth-child(4) {
+    animation-delay: 0.25s;
+}
+
+.character-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(255, 140, 0, 0.3);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-image-container {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    background: #000;
+    position: relative;
+}
+
+.character-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.character-card:hover img {
+    transform: scale(1.08);
+    /* Zoom sutil al hacer hover */
+}
+
+/* Contenido de la Tarjeta (Limpio) */
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: flex-start;
+    border-top: 1px solid var(--border-color);
+}
+
+.character-card h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+/* Lista de Atributos (Stats Modernas) */
+.character-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stat-line {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.01);
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.character-card:hover .stat-line {
+    background: rgba(255, 140, 0, 0.03);
+    color: var(--text-main);
+    border-color: rgba(255, 140, 0, 0.1);
+}
+
+/* ==========================================================================
+   5. ANIMACIONES Y ESTADOS (UX)
+   ========================================================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.loading-text {
+    text-align: center;
+    color: var(--primary);
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    margin-top: 50px;
+    animation: pulse 1.5s infinite;
+    width: 100%;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+/* Responsive Ajustes */
+@media (max-width: 600px) {
+    .app-wrapper {
+        padding: 40px 15px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+    }
+
+    .search-container {
+        border-radius: 20px;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .search-container button {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .character-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Una columna en móvil */
+}
