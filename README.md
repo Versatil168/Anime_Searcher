@@ -5,7 +5,7 @@
 ---
 
 ## 🚀 Vista Previa
-> **¡Pruébalo en vivo aquí!** -> [LINK_DE_VERCEL_AQUÍ_MAÑANA]
+> **¡Pruébalo en vivo aquí!** -> [[LINK_DE_VERCEL_AQUÍ_MAÑANA](https://anime-searcher-five.vercel.app)]
 
 ## ✨ Características Principales
 - 🔍 **Búsqueda Avanzada:** Encuentra personajes de cualquier anime usando la API de Jikan (MyAnimeList).
@@ -26,7 +26,7 @@ Si quieres ejecutar este proyecto localmente:
 
 1. Clona el repositorio:
    ```bash
-   git clone [https://github.com/TU_USUARIO/animedex-pro.git](https://github.com/TU_USUARIO/animedex-pro.git)
+   git clone [https://github.com/Versatil168/Anime_Searcher.git]
    
 2. Instala las dependencias:
    ```bash
